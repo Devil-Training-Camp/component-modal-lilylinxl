@@ -80,6 +80,6 @@ export const ConfirmDemo = () => (
     <Button onClick={showConfirm}>Confirm</Button>
     <Button onClick={showPromiseConfirm}>With promise</Button>
     <Button onClick={showDeleteConfirm}>Delete</Button>
-    <Button onClick={showPropsConfirm}>With extra props</Button>
+    {/* <Button onClick={showPropsConfirm}>With extra props</Button> */}
   </>
 );

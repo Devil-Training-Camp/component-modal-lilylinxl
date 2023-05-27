@@ -1,8 +1,9 @@
-import React, { ReactNode, useState } from "react";
+import React, { CSSProperties, ReactNode, useState } from "react";
 import "./index.less";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../Icon/index";
 import Button, { ButtonProps, ButtonType } from "../Button/index";
+import classNames from "classnames";
 
 export interface ModalProps {
   children?: ReactNode;
@@ -18,6 +19,8 @@ export interface ModalProps {
   okType?: ButtonType;
   cancelText?: string;
   okButtonProps?: ButtonProps;
+  style?: CSSProperties;
+  centered?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = (props) => {
@@ -32,9 +35,15 @@ const Modal: React.FC<ModalProps> = (props) => {
     okButtonProps,
     icon,
     okType,
+    style,
+    centered,
   } = props;
   const [isLoading, setIsLoading] = useState(confirmLoading);
-  const [visible, setVisible] = useState(open);
+
+  const modalClass = classNames("modal", {
+    "modal-centered": centered,
+  });
+
   const handleClose = () => {
     if (onCancel) {
       const cancelCb = onCancel();
@@ -43,7 +52,6 @@ const Modal: React.FC<ModalProps> = (props) => {
         cancelCb
           .then(() => {
             setIsLoading(false);
-            setVisible(false);
           })
           .catch((error) => {
             console.error(error);
@@ -63,7 +71,6 @@ const Modal: React.FC<ModalProps> = (props) => {
         okCb
           .then(() => {
             setIsLoading(false);
-            setVisible(false);
           })
           .catch((error) => {
             console.error(error);
@@ -75,38 +82,47 @@ const Modal: React.FC<ModalProps> = (props) => {
     }
   };
 
-  return visible ? (
-    <div className="modal-content">
-      <button className="modal-close" onClick={handleClose}>
-        <Icon icon={faTimes} />
-      </button>
-      <div className="modal-header">
-        <div className="modal-header-title">
-          {icon ? (
-            <span className="modal-header-title-icon"> {icon} </span>
-          ) : null}
-          {title}
+  return open ? (
+    <>
+      <div className="modal-mask"></div>
+      <div className="modal-wrap">
+        <div className={modalClass} style={style}>
+          <div className="modal-content">
+            <button className="modal-close" onClick={handleClose}>
+              <Icon icon={faTimes} />
+            </button>
+            <div className="modal-header">
+              <div className="modal-header-title">
+                {icon ? (
+                  <span className="modal-header-title-icon"> {icon} </span>
+                ) : null}
+                {title}
+              </div>
+            </div>
+            <div className="modal-body">{content || props.children}</div>
+            <div className="modal-footer">
+              {footer ? (
+                footer
+              ) : (
+                <>
+                  <Button onClick={handleClose}>取消</Button>
+                  <Button
+                    loading={
+                      confirmLoading !== undefined ? confirmLoading : isLoading
+                    }
+                    {...okButtonProps}
+                    type={okType || "primary"}
+                    onClick={handleOk}
+                  >
+                    确定
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-      <div className="modal-body">{content || props.children}</div>
-      <div className="modal-footer">
-        {footer ? (
-          footer
-        ) : (
-          <>
-            <Button onClick={handleClose}>取消</Button>
-            <Button
-              loading={isLoading}
-              {...okButtonProps}
-              type={okType || "primary"}
-              onClick={handleOk}
-            >
-              确定
-            </Button>
-          </>
-        )}
-      </div>
-    </div>
+    </>
   ) : null;
 };
 

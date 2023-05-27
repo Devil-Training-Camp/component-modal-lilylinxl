@@ -19,6 +19,7 @@ const confirm = (config: ModalProps) => {
         } else {
           return new Promise<void>((resolve) => {
             resolve();
+            close();
           });
         }
       } else {
@@ -30,10 +31,13 @@ const confirm = (config: ModalProps) => {
       if (onOk) {
         const okCb = onOk();
         if (okCb instanceof Promise) {
-          return okCb;
+          return okCb.then(() => {
+            close();
+          });
         } else {
           return new Promise<void>((resolve) => {
             resolve();
+            close();
           });
         }
       } else {
