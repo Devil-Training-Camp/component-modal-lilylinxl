@@ -1,0 +1,76 @@
+.button {
+    font-size: 14px;
+    height: 32px;
+    padding: 4px 15px;
+    border-radius: 6px;
+    outline: none;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    user-select: none;//
+    touch-action: manipulation;//
+    line-height: 1.5714285714285714;
+    color: rgba(0, 0, 0, 0.88);
+    
+}
+
+.button.danger {
+  background-color: #ff4d4f;
+  color: #fff;
+  &:disabled{
+    cursor: not-allowed;
+    border-color: #d9d9d9;
+    color: rgba(0,0,0,.25);
+    background-color: rgba(0,0,0,.04);
+    box-shadow: none;
+  }
+}
+
+.button.primary {
+  background-color: #1890ff;
+  color: #fff;
+  &:disabled{
+    cursor: not-allowed;
+    border-color: #d9d9d9;
+    color: rgba(0,0,0,.25);
+    background-color: rgba(0,0,0,.04);
+    box-shadow: none;
+  }
+}
+
+.button.warning {
+  background-color: #fa8c16;
+  color: #fff;
+  &:disabled{
+    cursor: not-allowed;
+    border-color: #d9d9d9;
+    color: rgba(0,0,0,.25);
+    background-color: rgba(0,0,0,.04);
+    box-shadow: none;
+  }
+}
+
+.button.default {
+  background-color: #fff;
+  border-color: #d9d9d9;
+  color: #333;
+  &:disabled{
+    cursor: not-allowed;
+    border-color: #d9d9d9;
+    color: rgba(0,0,0,.25);
+    background-color: rgba(0,0,0,.04);
+    box-shadow: none;
+  }
+}
+
+.spinner {
+  font-size: 12px;
+  margin-right: 6px;
+}

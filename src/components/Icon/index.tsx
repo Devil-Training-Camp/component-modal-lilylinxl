@@ -6,13 +6,14 @@ interface Props {
   icon: IconDefinition;
   size?: string;
   color?: string;
+  className?:string;
 }
 
 const Icon: React.FC<Props> = (props) => {
-  const { icon, size = '1em', color = 'currentColor',...restProps } = props;
+  const { icon, size = 'sm',...restProps } = props;
 
   return (
-    <FontAwesomeIcon icon={icon} size={size} color={color} {...restProps}/>
+    <FontAwesomeIcon icon={icon} size={size} {...restProps}/>
   );
 };
 

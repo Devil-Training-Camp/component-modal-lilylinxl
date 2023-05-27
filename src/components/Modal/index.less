@@ -10,6 +10,7 @@
   padding: 20px 24px;
   width: 520px;
   transform-origin: 186px 160px;
+ 
   .modal-close {
     position: absolute;
     top: 17px;
@@ -34,13 +35,16 @@
     background: #ffffff;
     border-radius: 8px 8px 0 0;
     margin-bottom: 8px;
-    &-header {
+    &-title {
       margin: 0;
       color: rgba(0, 0, 0, 0.88);
       font-weight: 600;
       font-size: 16px;
       line-height: 1.5;
       word-wrap: break-word;
+      &-icon {
+        margin-inline-end: 12px;
+      }
     }
   }
   .modal-body {
@@ -53,38 +57,8 @@
     background: transparent;
     margin-top: 12px;
     button {
-      font-size: 14px;
-      height: 32px;
-      padding: 4px 15px;
-      border-radius: 6px;
-      outline: none;
-      position: relative;
-      display: inline-block;
-      font-weight: 400;
-      white-space: nowrap;
-      text-align: center;
-      background-image: none;
-      background-color: transparent;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-      user-select: none;
-      touch-action: manipulation;
-      line-height: 1.5714285714285714;
-      color: rgba(0, 0, 0, 0.88);
-      &:first-child {
-        background-color: #ffffff;
-        border-color: #d9d9d9;
-        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
-      }
       &:last-child {
-        color: #fff;
-        background-color: #1677ff;
-        box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
         margin-inline-start: 8px;
-        span{
-            margin-left: 5px;
-        }
       }
     }
   }

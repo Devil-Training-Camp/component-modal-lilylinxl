@@ -1,50 +1,21 @@
-import React from 'react'
-import { useState } from 'react'
-import './App.less'
-import Modal from './components/Modal/index'
-
+import React from "react";
+import "./App.less";
+import Button from "./components/Button/index";
+import AsyncClose from "./demo/AsyncClose/index";
+import Basic from "./demo/Basic/index";
+import CustomFooter from "./demo/CustomFooter/index";
+import { ConfirmDemo } from "./demo/Confirm/index";
 function App() {
-const [open, setOpen] = useState(false);
-const [confirmLoading, setConfirmLoading] = useState(false);
-const [modalText, setModalText] = useState('Content of the modal');
-// const handleOk  = () =>{
-//   setOpen(false)
-// }
-// const handleCancel  = () =>{
-//   setOpen(false)
-// }
-const handleOpen = () => {
-  setOpen(true)
-
-}
-const handleOk = () => {
-  setModalText('The modal will be closed after two seconds');
-  setConfirmLoading(true);
-  setTimeout(() => {
-    setOpen(false);
-    setConfirmLoading(false);
-  }, 2000);
-};
-
-const handleCancel = () => {
-  console.log('Clicked cancel button');
-  setOpen(false);
-};
+  
   return (
     <>
-      <button onClick={handleOpen}>Switch</button>
-      {/* <Modal open={open} title={'提示信息'} onOk={handleOk} onCancel={handleCancel}>aaa</Modal> */}
-      <Modal
-        title="Title"
-        open={open}
-        onOk={handleOk}
-        confirmLoading={confirmLoading}
-        onCancel={handleCancel}
-      >
-        <p>{modalText}</p>
-      </Modal>
+      <Basic />
+      <AsyncClose />
+      <CustomFooter />
+      <ConfirmDemo/>
+
     </>
-  )
+  );
 }
 
-export default App
+export default App;
