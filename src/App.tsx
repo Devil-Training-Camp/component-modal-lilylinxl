@@ -5,6 +5,7 @@ import Basic from "./demo/Basic/index";
 import CustomFooter from "./demo/CustomFooter/index";
 import { ConfirmDemo } from "./demo/Confirm/index";
 import CustomPosition from "./demo/CustomPosition/index";
+import WidthDemo from "./demo/WidthDemo/index";
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
       <CustomFooter />
       <ConfirmDemo />
       <CustomPosition />
+      <WidthDemo />
     </>
   );
 }

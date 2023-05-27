@@ -19,8 +19,10 @@ export interface ModalProps {
   okType?: ButtonType;
   cancelText?: string;
   okButtonProps?: ButtonProps;
+  cancelButtonProps?: ButtonProps;
   style?: CSSProperties;
   centered?: boolean;
+  width?: number | string;
 }
 
 const Modal: React.FC<ModalProps> = (props) => {
@@ -33,10 +35,12 @@ const Modal: React.FC<ModalProps> = (props) => {
     footer,
     content,
     okButtonProps,
+    cancelButtonProps,
     icon,
     okType,
     style,
     centered,
+    width,
   } = props;
   const [isLoading, setIsLoading] = useState(confirmLoading);
 
@@ -86,7 +90,10 @@ const Modal: React.FC<ModalProps> = (props) => {
     <>
       <div className="modal-mask"></div>
       <div className="modal-wrap">
-        <div className={modalClass} style={style}>
+        <div
+          className={modalClass}
+          style={{ ...style, width: typeof Number ? `${width}px` : width }}
+        >
           <div className="modal-content">
             <button className="modal-close" onClick={handleClose}>
               <Icon icon={faTimes} />
@@ -105,7 +112,9 @@ const Modal: React.FC<ModalProps> = (props) => {
                 footer
               ) : (
                 <>
-                  <Button onClick={handleClose}>取消</Button>
+                  <Button onClick={handleClose} {...cancelButtonProps}>
+                    取消
+                  </Button>
                   <Button
                     loading={
                       confirmLoading !== undefined ? confirmLoading : isLoading

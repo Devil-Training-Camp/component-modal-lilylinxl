@@ -15,7 +15,9 @@ const confirm = (config: ModalProps) => {
       if (onCancel) {
         const cancelCb = onCancel();
         if (cancelCb instanceof Promise) {
-          return cancelCb;
+          return cancelCb.finally(() => {
+            close();
+          });
         } else {
           return new Promise<void>((resolve) => {
             resolve();
@@ -31,7 +33,7 @@ const confirm = (config: ModalProps) => {
       if (onOk) {
         const okCb = onOk();
         if (okCb instanceof Promise) {
-          return okCb.then(() => {
+          return okCb.finally(() => {
             close();
           });
         } else {
