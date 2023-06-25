@@ -1,29 +1,10 @@
-import React, { CSSProperties, ReactNode, useState } from "react";
-import "./index.less";
+import React, { useState } from "react";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../Icon/index";
-import Button, { ButtonProps, ButtonType } from "../Button/index";
+import Button from "../Button/index";
 import classNames from "classnames";
+import { ModalProps } from "./interface";
 
-export interface ModalProps {
-  children?: ReactNode;
-  title?: string;
-  open?: boolean;
-  onOk?: Function;
-  onCancel?: Function;
-  confirmLoading?: boolean;
-  footer?: ReactNode;
-  icon?: ReactNode;
-  content?: ReactNode;
-  okText?: string;
-  okType?: ButtonType;
-  cancelText?: string;
-  okButtonProps?: ButtonProps;
-  cancelButtonProps?: ButtonProps;
-  style?: CSSProperties;
-  centered?: boolean;
-  width?: number | string;
-}
 
 const Modal: React.FC<ModalProps> = (props) => {
   const {
@@ -43,7 +24,6 @@ const Modal: React.FC<ModalProps> = (props) => {
     width,
   } = props;
   const [isLoading, setIsLoading] = useState(confirmLoading);
-
   const modalClass = classNames("modal", {
     "modal-centered": centered,
   });
@@ -108,10 +88,10 @@ const Modal: React.FC<ModalProps> = (props) => {
             </div>
             <div className="modal-body">{content || props.children}</div>
             <div className="modal-footer">
-              {footer ? (
+              {footer||footer===null ? (
                 footer
               ) : (
-                <>
+             <>
                   <Button onClick={handleClose} {...cancelButtonProps}>
                     取消
                   </Button>
