@@ -1,14 +1,10 @@
-// import { JSXElementConstructor, ReactElement } from 'react';
-import {createRoot} from 'react-dom/client';
-import ReactDOM from 'react-dom';
-
-// import { createRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
+import ReactDOM, { createPortal } from 'react-dom';
 
 export const render = (element: any, container: any) => {
-  createRoot(container).render(element);
-  ReactDOM.render(element, container);
-    document.body.appendChild(container);
-
+  // createRoot(container).render(element);
+  createPortal(element, container);
+  // document.body.appendChild(container);
 };
 
 export const unmount = (container: any) => {

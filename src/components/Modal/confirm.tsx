@@ -1,21 +1,46 @@
-import { render as reactRender, unmount as reactUnmount } from '../../util/index';
+import {
+  render as reactRender,
+  unmount as reactUnmount,
+} from '../../util/index';
 import * as React from 'react';
 import ConfirmDialog from './ConfirmDialog';
 import destroyFns from './destroyFns';
 import type { ModalFuncProps } from './interface';
 
-type ConfigUpdate = ModalFuncProps | ((prevConfig: ModalFuncProps) => ModalFuncProps);
+type ConfigUpdate =
+  | ModalFuncProps
+  | ((prevConfig: ModalFuncProps) => ModalFuncProps);
 
 export type ModalFunc = (props: ModalFuncProps) => {
   destroy: () => void;
   update: (configUpdate: ConfigUpdate) => void;
 };
 
-export type ModalStaticFunctions = Record<NonNullable<ModalFuncProps['type']>, ModalFunc>;
+export type ModalStaticFunctions = Record<
+  NonNullable<ModalFuncProps['type']>,
+  ModalFunc
+>;
 
 export default function confirm(config: ModalFuncProps) {
-
   const container = document.createDocumentFragment();
+  // const container = document.getElementById('root');
+  const doc = window.document;
+  doc.body.appendChild(container);
+  const close = (...args: any[]) => {
+    currentConfig = {
+      ...currentConfig,
+      open: false,
+      afterClose: () => {
+        if (typeof config.afterClose === 'function') {
+          config.afterClose();
+        }
+
+        destroy.apply(this, args);
+      },
+    };
+
+    render(currentConfig);
+  };
   let currentConfig = { ...config, close, open: true } as any;
   let timeoutId: NodeJS.Timeout;
 
@@ -35,13 +60,7 @@ export default function confirm(config: ModalFuncProps) {
     reactUnmount(container);
   }
 
-  function render({
-    okText,
-    cancelText,
-    prefixCls: customizePrefixCls,
-    getContainer,
-    ...props
-  }: any) {
+  function render({ okText, cancelText, getContainer, ...props }: any) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
       let mergedGetContainer = getContainer;
@@ -55,25 +74,9 @@ export default function confirm(config: ModalFuncProps) {
           okText={okText}
           cancelText={cancelText}
         />,
-        container,
+        container
       );
     });
-  }
-
-  function close(...args: any[]) {
-    currentConfig = {
-      ...currentConfig,
-      open: false,
-      afterClose: () => {
-        if (typeof config.afterClose === 'function') {
-          config.afterClose();
-        }
-
-        destroy.apply(this, args);
-      },
-    };
-
-    render(currentConfig);
   }
 
   function update(configUpdate: ConfigUpdate) {

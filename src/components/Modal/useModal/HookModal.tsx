@@ -12,10 +12,10 @@ export interface HookModalRef {
   update: (config: ModalFuncProps) => void;
 }
 
-const HookModal: React.ForwardRefRenderFunction<HookModalRef, HookModalProps> = (
-  { afterClose: hookAfterClose, config },
-  ref,
-) => {
+const HookModal: React.ForwardRefRenderFunction<
+  HookModalRef,
+  HookModalProps
+> = ({ afterClose: hookAfterClose, config }, ref) => {
   const [open, setOpen] = React.useState(true);
   const [innerConfig, setInnerConfig] = React.useState(config);
 
@@ -44,13 +44,14 @@ const HookModal: React.ForwardRefRenderFunction<HookModalRef, HookModalProps> = 
   }));
   return (
     <ConfirmDialog
-    rootPrefixCls={''} {...innerConfig}
-    close={close}
-    open={open}
-    afterClose={afterClose}
-    okText={innerConfig.okText ||'知道了'}
-    direction={innerConfig.direction}
-    cancelText={innerConfig.cancelText}    />
+      {...innerConfig}
+      close={close}
+      open={open}
+      afterClose={afterClose}
+      okText={innerConfig.okText || '知道了'}
+      direction={innerConfig.direction}
+      cancelText={innerConfig.cancelText}
+    />
   );
 };
 
