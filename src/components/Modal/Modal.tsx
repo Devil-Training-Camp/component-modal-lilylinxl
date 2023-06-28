@@ -69,26 +69,26 @@ const Modal: React.FC<ModalProps> = (props) => {
   };
 
   const contentElement = (
-    <div className="modal-content">
-      <button className="modal-close" onClick={handleClose}>
-        <Icon icon={faTimes} />
-      </button>
-      <div className="modal-header">
-        <div className="modal-header-title">
+    <section className="modal-content">
+      <Button className="modal-close" onClick={handleClose}>
+        <Icon icon={faTimes} size="lg" />
+      </Button>
+      <header className="modal-header">
+        <section className="modal-header-title">
           {icon ? (
             <span className="modal-header-title-icon"> {icon} </span>
           ) : null}
           {title}
-        </div>
-      </div>
+        </section>
+      </header>
       {modalRender ? (
         modalRender(
-          <div className="modal-body">{content || props.children}</div>
+          <main className="modal-body">{content || props.children}</main>
         )
       ) : (
-        <div className="modal-body">{content || props.children}</div>
+        <main className="modal-body">{content || props.children}</main>
       )}
-      <div className="modal-footer">
+      <footer className="modal-footer">
         <button
           onClick={() => {
             console.log('233');
@@ -115,20 +115,20 @@ const Modal: React.FC<ModalProps> = (props) => {
             </Button>
           </>
         )}
-      </div>
-    </div>
+      </footer>
+    </section>
   );
   return open ? (
     <>
-      <div className="modal-mask"></div>
-      <div className="modal-wrap">
-        <div
+      <section className="modal-mask"></section>
+      <section className="modal-wrap">
+        <section
           className={modalClass}
           style={{ ...style, width: typeof Number ? `${width}px` : width }}
         >
           {modalRender ? modalRender(contentElement) : contentElement}
-        </div>
-      </div>
+        </section>
+      </section>
     </>
   ) : null;
 };

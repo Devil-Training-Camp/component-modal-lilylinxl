@@ -29,7 +29,7 @@ export function ConfirmContent(props: ConfirmDialogProps) {
   } = props;
   // Icon
   let mergedIcon: React.ReactNode = icon;
-
+  const [isLoading, setIsLoading] = React.useState(false);
   // 支持传入{ icon: null }来隐藏`Modal.confirm`默认的Icon
   if (!icon && icon !== null) {
     switch (type) {
@@ -51,11 +51,30 @@ export function ConfirmContent(props: ConfirmDialogProps) {
   }
 
   const okType = props.okType || 'primary';
+  const handleCancel = async () => {
+    if (onCancel) {
+      setIsLoading(true);
+      const result = await onCancel();
+      result && result();
+      setIsLoading(false);
+    }
+    close && close();
+  };
   const cancelButton = cancelText && (
-    <Button onClick={onCancel} {...cancelButtonProps}>
+    <Button onClick={handleCancel} {...cancelButtonProps}>
       {cancelText}
     </Button>
   );
+
+  const handleOk = async () => {
+    if (onOk) {
+      setIsLoading(true);
+      const result = await onOk();
+      result && result();
+      setIsLoading(false);
+    }
+    close && close();
+  };
 
   return (
     <div className={`modal-confirm-body-wrapper`}>
@@ -74,10 +93,8 @@ export function ConfirmContent(props: ConfirmDialogProps) {
           <Button
             type={okType}
             {...okButtonProps}
-            onClick={() => {
-              onOk && onOk();
-              close && close();
-            }}
+            onClick={handleOk}
+            loading={isLoading}
           >
             {okText || '我知道了'}
           </Button>
