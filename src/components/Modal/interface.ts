@@ -5,7 +5,7 @@ export type DirectionType = 'ltr' | 'rtl' | undefined;
 type getContainerFunc = () => HTMLElement;
 export interface ModalProps {
   children?: ReactNode;
-  title?: string;
+  title?: string | ReactNode;
   open?: boolean;
   onOk?: Function;
   onCancel?: Function;

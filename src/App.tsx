@@ -9,9 +9,12 @@ import WidthDemo from "./demo/WidthDemo/index";
 import UseModalDemo from "./demo/UseModalDemo/index";
 import UpdateAndDestory from "./demo/UpdateAndDestory/index";
 import ContextHolder from "./demo/ContextHolder/index";
+import DraggableDemo from "./demo/Draggable/index";
+import StaticFuncDemo from "./demo/StaticFuncDemo/index";
+import DestroyAll from "./demo/DestroyAll/index";
 function App() {
   return (
-    <>
+    <div id='app'>
       <Basic />
       <AsyncClose />
       <CustomFooter />
@@ -21,7 +24,10 @@ function App() {
       <UseModalDemo/>
       <UpdateAndDestory/>
       <ContextHolder/>
-    </>
+      <DraggableDemo/>
+      <StaticFuncDemo/>
+      <DestroyAll/>
+    </div>
   );
 }
 

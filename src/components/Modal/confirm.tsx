@@ -43,13 +43,11 @@ export default function confirm(config: ModalFuncProps) {
     ...props
   }: any) {
     clearTimeout(timeoutId);
-
     timeoutId = setTimeout(() => {
       let mergedGetContainer = getContainer;
       if (mergedGetContainer === false) {
         mergedGetContainer = undefined;
       }
-
       reactRender(
         <ConfirmDialog
           {...props}

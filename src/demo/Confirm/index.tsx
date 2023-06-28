@@ -10,7 +10,7 @@ const showConfirm = () => {
   confirm({
     title: "Do you Want to delete these items?",
     content: "Some descriptions",
-    icon: <Icon icon={faExclamationCircle} color="#faad14" size="22px" />,
+    // icon: <Icon icon={faExclamationCircle} color="#faad14" size="22px" />,
     onOk() {
       console.log("OK");
     },

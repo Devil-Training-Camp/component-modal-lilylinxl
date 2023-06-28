@@ -1,10 +1,14 @@
-import classNames from 'classnames';
-import * as React from 'react';
-import Dialog from './Modal';
-import type { ModalFuncProps } from './interface';
-import Icon from '../Icon/index';
-import { faTimesCircle,faCheckCircle,faInfoCircle } from '../../../node_modules/@fortawesome/free-solid-svg-icons/index';
-import Button from '../Button/index';
+import classNames from "classnames";
+import * as React from "react";
+import Dialog from "./Modal";
+import type { ModalFuncProps } from "./interface";
+import Icon from "../Icon/index";
+import {
+  faTimesCircle,
+  faCheckCircle,
+  faInfoCircle,
+} from "../../../node_modules/@fortawesome/free-solid-svg-icons/index";
+import Button from "../Button/index";
 
 interface ConfirmDialogProps extends ModalFuncProps {
   afterClose?: () => void;
@@ -16,7 +20,7 @@ interface ConfirmDialogProps extends ModalFuncProps {
 export function ConfirmContent(
   props: ConfirmDialogProps & {
     confirmPrefixCls: string;
-  },
+  }
 ) {
   const {
     icon,
@@ -27,63 +31,70 @@ export function ConfirmContent(
     cancelText,
     cancelButtonProps,
     type,
-    okCancel,
     footer,
-    close
+    close,
   } = props;
-
   // Icon
   let mergedIcon: React.ReactNode = icon;
 
   // 支持传入{ icon: null }来隐藏`Modal.confirm`默认的Icon
   if (!icon && icon !== null) {
     switch (type) {
-      case 'info':
-        mergedIcon = <Icon icon={faInfoCircle} color="#1677ff" size='lg' />;
+      case "info":
+        mergedIcon = <Icon icon={faInfoCircle} color="#1677ff" size="lg" />;
         break;
 
-      case 'success':
-        mergedIcon = <Icon icon={faCheckCircle} color='green' size='lg'/>;
+      case "success":
+        mergedIcon = <Icon icon={faCheckCircle} color="green" size="lg" />;
         break;
 
-      case 'error':
-        mergedIcon =  <Icon icon={faTimesCircle} color='red' size='lg'/>;
+      case "error":
+        mergedIcon = <Icon icon={faTimesCircle} color="red" size="lg" />;
         break;
 
       default:
-        mergedIcon = <Icon icon={faInfoCircle} color="#faad14" size='lg'/>;
+        mergedIcon = <Icon icon={faInfoCircle} color="#faad14" size="lg" />;
     }
   }
 
-  const okType = props.okType || 'primary';
+  const okType = props.okType || "primary";
   const cancelButton = cancelText && (
-    <Button
-      onClick={onCancel}
-      {...cancelButtonProps}
-    >
+    <Button onClick={onCancel} {...cancelButtonProps}>
       {cancelText}
     </Button>
   );
 
   return (
-    <div className={`modal-confirm-body-wrapper`}>
-      <div className={`modal-confirm-body`}>
-       <div style={{marginRight:'10px',display:'inline-block'}}> {mergedIcon}</div>
+    <div className={`modal-confirm-body-wrapper`} >
+      <div className={`modal-confirm-body`} >
+        <div style={{ marginRight: "10px", display: "inline-block" }}>
+          {" "}
+          {mergedIcon}
+        </div>
         {props.title === undefined ? null : (
           <span className={`modal-confirm-title`}>{props.title}</span>
         )}
-        <div className={`modal-confirm-content`}>{props.content}</div>
+        <div className={`modal-confirm-content`}  >{props.content}</div>
       </div>
       {footer === undefined ? (
-        <div className={`modal-confirm-btns`}>
+        <div className={`modal-confirm-btns`}  >
+          <button onClick={()=>{
+            console.log('222')
+          }}>222</button>
           {cancelButton}
-        { okText ? <Button
+          {/* { okText ?  */}
+          <Button
             type={okType}
-            onClick={onOk|| close }
-           {...okButtonProps}
+            {...okButtonProps}
+            onClick={() => {
+             console.log('1111', 1111)
+              // onOk && onOk();
+              // close && close();
+            }}
           >
-            {okText}
-          </Button> : null }  
+            {okText || "我知道了"}
+          </Button>
+          {/* // : null   */}
         </div>
       ) : (
         footer
@@ -112,53 +123,54 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = (props) => {
     focusTriggerAfterClose,
   } = props;
 
-
   const confirmPrefixCls = `${prefixCls}-confirm`;
 
   const width = props.width || 416;
   const style = props.style || {};
   const mask = props.mask === undefined ? true : props.mask;
-  const maskClosable = props.maskClosable === undefined ? false : props.maskClosable;
+  const maskClosable =
+    props.maskClosable === undefined ? false : props.maskClosable;
 
   const classString = classNames(
     confirmPrefixCls,
     `${confirmPrefixCls}-${props.type}`,
-    { [`${confirmPrefixCls}-rtl`]: direction === 'rtl' },
-    props.className,
+    { [`${confirmPrefixCls}-rtl`]: direction === "rtl" },
+    props.className
   );
 
   return (
-      <Dialog
-        className={classString}
-        wrapClassName={classNames(
-          { [`${confirmPrefixCls}-centered`]: !!props.centered },
-          wrapClassName,
-        )}
-        onCancel={() => close?.({ triggerCancel: true })}
-        open={open}
-        title=""
-        footer={null}
-        mask={mask}
-        maskClosable={maskClosable}
-        maskStyle={maskStyle}
-        style={style}
-        bodyStyle={bodyStyle}
-        width={width}
-        zIndex={zIndex}
-        afterClose={afterClose}
-        keyboard={keyboard}
-        centered={centered}
-        getContainer={getContainer}
-        closable={closable}
-        closeIcon={closeIcon}
-        modalRender={modalRender}
-        focusTriggerAfterClose={focusTriggerAfterClose}
-      >
-        <ConfirmContent {...props} confirmPrefixCls={confirmPrefixCls} />
-      </Dialog>
+    <Dialog
+      // className={classString}
+      // wrapClassName={classNames(
+      //   { [`${confirmPrefixCls}-centered`]: !!props.centered },
+      //   wrapClassName
+      // )}
+      // onCancel={() => close?.({ triggerCancel: true })}
+      open={open}
+      // title=""
+      // footer={null}
+      // mask={mask}
+      // maskClosable={maskClosable}
+      // maskStyle={maskStyle}
+      // style={style}
+      // bodyStyle={bodyStyle}
+      // width={width}
+      // zIndex={zIndex}
+      // afterClose={afterClose}
+      // keyboard={keyboard}
+      // centered={centered}
+      // getContainer={getContainer}
+      // closable={closable}
+      // closeIcon={closeIcon}
+      // modalRender={modalRender}
+      // focusTriggerAfterClose={focusTriggerAfterClose}
+    >
+      aaa
+      {/* <ConfirmContent {...props} confirmPrefixCls={confirmPrefixCls} /> */}
+    </Dialog>
   );
 };
 
-ConfirmDialog.displayName = 'ConfirmDialog';
+// ConfirmDialog.displayName = "ConfirmDialog";
 
 export default ConfirmDialog;

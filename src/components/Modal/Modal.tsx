@@ -7,6 +7,7 @@ import { ModalProps } from "./interface";
 
 
 const Modal: React.FC<ModalProps> = (props) => {
+ console.log('props', props)
   const {
     title,
     open,
@@ -22,6 +23,8 @@ const Modal: React.FC<ModalProps> = (props) => {
     style,
     centered,
     width,
+    modalRender,
+    closeIcon
   } = props;
   const [isLoading, setIsLoading] = useState(confirmLoading);
   const modalClass = classNames("modal", {
@@ -29,6 +32,7 @@ const Modal: React.FC<ModalProps> = (props) => {
   });
 
   const handleClose = () => {
+    debugger
     if (onCancel) {
       const cancelCb = onCancel();
       if (cancelCb instanceof Promise) {
@@ -66,49 +70,53 @@ const Modal: React.FC<ModalProps> = (props) => {
     }
   };
 
+  const contentElement = (
+   <div className="modal-content">
+    <button className="modal-close" onClick={handleClose}>
+      <Icon icon={faTimes} />
+    </button>
+    <div className="modal-header">
+      <div className="modal-header-title">
+        {icon ? (
+          <span className="modal-header-title-icon"> {icon} </span>
+        ) : null}
+        {title}
+      </div>
+    </div>
+    {modalRender ? modalRender(<div className="modal-body">{content || props.children}</div>) :  <div className="modal-body">{content || props.children}</div>}
+    <div className="modal-footer">
+      <button onClick={()=>{console.log('233')}}>444</button>
+      {footer||footer===null ? (
+        footer
+      ) : (
+     <>
+          <Button onClick={handleClose} {...cancelButtonProps}>
+            取消
+          </Button>
+          <Button
+            loading={
+              confirmLoading !== undefined ? confirmLoading : isLoading
+            }
+            {...okButtonProps}
+            type={okType || "primary"}
+            onClick={handleOk}
+          >
+            确定
+          </Button>
+        </>
+      )}
+    </div>
+  </div>
+)
   return open ? (
     <>
       <div className="modal-mask"></div>
-      <div className="modal-wrap">
+      <div className="modal-wrap" >
         <div
           className={modalClass}
           style={{ ...style, width: typeof Number ? `${width}px` : width }}
         >
-          <div className="modal-content">
-            <button className="modal-close" onClick={handleClose}>
-              <Icon icon={faTimes} />
-            </button>
-            <div className="modal-header">
-              <div className="modal-header-title">
-                {icon ? (
-                  <span className="modal-header-title-icon"> {icon} </span>
-                ) : null}
-                {title}
-              </div>
-            </div>
-            <div className="modal-body">{content || props.children}</div>
-            <div className="modal-footer">
-              {footer||footer===null ? (
-                footer
-              ) : (
-             <>
-                  <Button onClick={handleClose} {...cancelButtonProps}>
-                    取消
-                  </Button>
-                  <Button
-                    loading={
-                      confirmLoading !== undefined ? confirmLoading : isLoading
-                    }
-                    {...okButtonProps}
-                    type={okType || "primary"}
-                    onClick={handleOk}
-                  >
-                    确定
-                  </Button>
-                </>
-              )}
-            </div>
-          </div>
+            {modalRender ? modalRender(contentElement) :  contentElement}
         </div>
       </div>
     </>
