@@ -1,10 +1,7 @@
-import { createRoot } from 'react-dom/client';
-import ReactDOM, { createPortal } from 'react-dom';
+import ReactDOM from 'react-dom';
 
 export const render = (element: any, container: any) => {
-  // createRoot(container).render(element);
-  createPortal(element, container);
-  // document.body.appendChild(container);
+  ReactDOM.render(element, container);
 };
 
 export const unmount = (container: any) => {

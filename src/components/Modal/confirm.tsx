@@ -22,10 +22,11 @@ export type ModalStaticFunctions = Record<
 >;
 
 export default function confirm(config: ModalFuncProps) {
-  const container = document.createDocumentFragment();
-  // const container = document.getElementById('root');
-  const doc = window.document;
-  doc.body.appendChild(container);
+  var container = document.createElement('div');
+  container.setAttribute('class', 'ant-modal-root');
+  if (!document.getElementsByClassName('ant-modal-root').length) {
+    document.body.appendChild(container);
+  }
   const close = (...args: any[]) => {
     currentConfig = {
       ...currentConfig,
@@ -34,11 +35,10 @@ export default function confirm(config: ModalFuncProps) {
         if (typeof config.afterClose === 'function') {
           config.afterClose();
         }
-
         destroy.apply(this, args);
       },
     };
-
+    reactUnmount(container);
     render(currentConfig);
   };
   let currentConfig = { ...config, close, open: true } as any;
@@ -60,20 +60,11 @@ export default function confirm(config: ModalFuncProps) {
     reactUnmount(container);
   }
 
-  function render({ okText, cancelText, getContainer, ...props }: any) {
+  function render({ okText, cancelText, ...props }: any) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
-      let mergedGetContainer = getContainer;
-      if (mergedGetContainer === false) {
-        mergedGetContainer = undefined;
-      }
       reactRender(
-        <ConfirmDialog
-          {...props}
-          getContainer={mergedGetContainer}
-          okText={okText}
-          cancelText={cancelText}
-        />,
+        <ConfirmDialog {...props} okText={okText} cancelText={cancelText} />,
         container
       );
     });
