@@ -5,6 +5,5 @@ export const render = (element: any, container: any) => {
 };
 
 export const unmount = (container: any) => {
-  ReactDOM.unmountComponentAtNode(container);
   document.body.removeChild(container);
 };

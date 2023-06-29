@@ -24,9 +24,7 @@ export type ModalStaticFunctions = Record<
 export default function confirm(config: ModalFuncProps) {
   var container = document.createElement('div');
   container.setAttribute('class', 'ant-modal-root');
-  if (!document.getElementsByClassName('ant-modal-root').length) {
-    document.body.appendChild(container);
-  }
+
   const close = (...args: any[]) => {
     currentConfig = {
       ...currentConfig,
@@ -38,7 +36,6 @@ export default function confirm(config: ModalFuncProps) {
         destroy.apply(this, args);
       },
     };
-    reactUnmount(container);
     render(currentConfig);
   };
   let currentConfig = { ...config, close, open: true } as any;
@@ -61,6 +58,11 @@ export default function confirm(config: ModalFuncProps) {
   }
 
   function render({ okText, cancelText, ...props }: any) {
+    if (!document.getElementsByClassName('ant-modal-root').length) {
+      document.body.appendChild(container);
+    } else {
+      document.body.removeChild(container);
+    }
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
       reactRender(

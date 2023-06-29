@@ -89,13 +89,6 @@ const Modal: React.FC<ModalProps> = (props) => {
         <main className="modal-body">{content || props.children}</main>
       )}
       <footer className="modal-footer">
-        <button
-          onClick={() => {
-            console.log('233');
-          }}
-        >
-          444
-        </button>
         {footer || footer === null ? (
           footer
         ) : (
