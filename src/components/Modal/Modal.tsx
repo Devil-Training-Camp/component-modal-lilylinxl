@@ -22,6 +22,7 @@ const Modal: React.FC<ModalProps> = (props) => {
     modalRender,
     className,
     afterClose,
+    mask = true,
   } = props;
   const [isLoading] = useState(confirmLoading);
   const modalClass = classNames('modal', className, {
@@ -85,7 +86,7 @@ const Modal: React.FC<ModalProps> = (props) => {
   );
   return open ? (
     <div className="modal-root">
-      <section className="modal-mask"></section>
+      {mask ? <section className="modal-mask"></section> : null}
       <section className="modal-wrap">
         <section
           className={modalClass}
