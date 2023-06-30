@@ -6,6 +6,7 @@ import {
   faTimesCircle,
   faCheckCircle,
   faInfoCircle,
+  faExclamationCircle,
 } from '../../../node_modules/@fortawesome/free-solid-svg-icons/index';
 import Button from '../Button/index';
 
@@ -46,7 +47,9 @@ export function ConfirmContent(props: ConfirmDialogProps) {
         break;
 
       default:
-        mergedIcon = <Icon icon={faInfoCircle} color="#faad14" size="lg" />;
+        mergedIcon = (
+          <Icon icon={faExclamationCircle} color="#faad14" size="lg" />
+        );
     }
   }
 
@@ -60,9 +63,10 @@ export function ConfirmContent(props: ConfirmDialogProps) {
     }
     close && close();
   };
-  const cancelButton = cancelText && (
+  const showFooter = type === 'confirm'; //这有啥用？
+  const cancelButton = showFooter && (
     <Button onClick={handleCancel} {...cancelButtonProps}>
-      {cancelText}
+      {cancelText || '取消'}
     </Button>
   );
 
@@ -77,18 +81,20 @@ export function ConfirmContent(props: ConfirmDialogProps) {
   };
 
   return (
-    <div className={`modal-confirm-body-wrapper`}>
-      <div className={`modal-confirm-body`}>
-        <div style={{ marginRight: '10px', display: 'inline-block' }}>
-          {mergedIcon}
+    <div className={`modal-body-wrapper`}>
+      <div className={`modal-body`}>
+        <div className={`modal-header`}>
+          {props.title === undefined ? null : (
+            <div className={`modal-header-title`}>
+              <span className="modal-header-title-icon">{mergedIcon}</span>
+              {props.title}
+            </div>
+          )}
         </div>
-        {props.title === undefined ? null : (
-          <span className={`modal-confirm-title`}>{props.title}</span>
-        )}
         <div className={`modal-confirm-content`}>{props.content}</div>
       </div>
       {footer === undefined ? (
-        <div className={`modal-confirm-btns`}>
+        <div className={`modal-btns`}>
           {cancelButton}
           <Button
             type={okType}
@@ -96,7 +102,7 @@ export function ConfirmContent(props: ConfirmDialogProps) {
             onClick={handleOk}
             loading={isLoading}
           >
-            {okText || '我知道了'}
+            {showFooter ? okText || '确定' : '知道了'}
           </Button>
         </div>
       ) : (
@@ -118,6 +124,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = (props) => {
     closeIcon,
     modalRender,
     className,
+    afterClose,
   } = props;
 
   const width = props.width || 416;
@@ -144,6 +151,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = (props) => {
       closable={closable}
       closeIcon={closeIcon}
       modalRender={modalRender}
+      afterClose={afterClose}
     >
       <ConfirmContent {...props} />
     </Dialog>

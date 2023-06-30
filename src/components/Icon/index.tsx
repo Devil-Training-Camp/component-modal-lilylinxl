@@ -6,15 +6,14 @@ interface Props {
   icon: IconDefinition;
   size?: string;
   color?: string;
-  className?:string;
+  className?: string;
+  spin?: boolean;
 }
 
 const Icon: React.FC<Props> = (props) => {
-  const { icon, size = 'sm',...restProps } = props;
+  const { icon, size = 'sm', ...restProps } = props;
 
-  return (
-    <FontAwesomeIcon icon={icon} size={size} {...restProps}/>
-  );
+  return <FontAwesomeIcon icon={icon} size={size} {...restProps} />;
 };
 
 export default Icon;

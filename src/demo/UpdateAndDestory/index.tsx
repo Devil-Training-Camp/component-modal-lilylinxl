@@ -1,15 +1,15 @@
-import React from "react";
-import Button from "../../components/Button/index";
-import Modal from "../../components/Modal/index";
+import React from 'react';
+import Button from '../../components/Button/index';
+import Modal from '../../components/Modal/index';
 
 const UpdateAndDestory: React.FC = () => {
   const [modal, contextHolder] = Modal.useModal();
 
   const countDown = () => {
-    let secondsToGo = 100;
+    let secondsToGo = 5;
 
     const instance = modal.success({
-      title: "This is a notification message",
+      title: 'This is a notification message',
       content: `This modal will be destroyed after ${secondsToGo} second.`,
     });
 

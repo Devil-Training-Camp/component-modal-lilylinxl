@@ -9,8 +9,6 @@ const Modal: React.FC<ModalProps> = (props) => {
   const {
     title,
     open,
-    onOk,
-    onCancel,
     confirmLoading,
     footer,
     content,
@@ -22,55 +20,29 @@ const Modal: React.FC<ModalProps> = (props) => {
     centered,
     width,
     modalRender,
-    closeIcon,
     className,
+    afterClose,
   } = props;
-  const [isLoading, setIsLoading] = useState(confirmLoading);
+  const [isLoading] = useState(confirmLoading);
   const modalClass = classNames('modal', className, {
     'modal-centered': centered,
   });
 
-  const handleClose = () => {
-    if (onCancel) {
-      const cancelCb = onCancel();
-      if (cancelCb instanceof Promise) {
-        setIsLoading(true);
-        cancelCb
-          .then(() => {
-            setIsLoading(false);
-          })
-          .catch((error) => {
-            console.error(error);
-            setIsLoading(false);
-          });
-      } else {
-        onCancel();
-      }
-    }
+  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const { onCancel } = props;
+    onCancel?.(e);
   };
 
-  const handleOk = () => {
-    if (onOk) {
-      const okCb = onOk();
-      if (okCb instanceof Promise) {
-        setIsLoading(true);
-        okCb
-          .then(() => {
-            setIsLoading(false);
-          })
-          .catch((error) => {
-            console.error(error);
-            setIsLoading(false);
-          });
-      } else {
-        onOk();
-      }
-    }
+  const handleOk = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const { onOk } = props;
+    onOk?.(e);
   };
-
+  if (!open) {
+    afterClose?.();
+  }
   const contentElement = (
     <section className="modal-content">
-      <Button className="modal-close" onClick={handleClose}>
+      <Button className="modal-close" onClick={handleCancel}>
         <Icon icon={faTimes} size="lg" />
       </Button>
       <header className="modal-header">
@@ -93,7 +65,7 @@ const Modal: React.FC<ModalProps> = (props) => {
           footer
         ) : (
           <>
-            <Button onClick={handleClose} {...cancelButtonProps}>
+            <Button onClick={handleCancel} {...cancelButtonProps}>
               取消
             </Button>
             <Button
@@ -112,7 +84,7 @@ const Modal: React.FC<ModalProps> = (props) => {
     </section>
   );
   return open ? (
-    <>
+    <div className="modal-root">
       <section className="modal-mask"></section>
       <section className="modal-wrap">
         <section
@@ -122,7 +94,7 @@ const Modal: React.FC<ModalProps> = (props) => {
           {modalRender ? modalRender(contentElement) : contentElement}
         </section>
       </section>
-    </>
+    </div>
   ) : null;
 };
 

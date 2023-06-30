@@ -6,7 +6,6 @@ import CustomFooter from './demo/CustomFooter/index';
 import { ConfirmDemo } from './demo/Confirm/index';
 import CustomPosition from './demo/CustomPosition/index';
 import WidthDemo from './demo/WidthDemo/index';
-import UseModalDemo from './demo/UseModalDemo/index';
 import UpdateAndDestory from './demo/UpdateAndDestory/index';
 import ContextHolder from './demo/ContextHolder/index';
 import DraggableDemo from './demo/Draggable/index';
@@ -21,7 +20,6 @@ function App() {
       <ConfirmDemo />
       <CustomPosition />
       <WidthDemo />
-      <UseModalDemo />
       <UpdateAndDestory />
       <ContextHolder />
       <DraggableDemo />

@@ -48,7 +48,7 @@ const HookModal: React.ForwardRefRenderFunction<
       close={close}
       open={open}
       afterClose={afterClose}
-      okText={innerConfig.okText || '知道了'}
+      okText={innerConfig.okText}
       direction={innerConfig.direction}
       cancelText={innerConfig.cancelText}
     />

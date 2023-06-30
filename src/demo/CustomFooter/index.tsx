@@ -25,9 +25,7 @@ const CustomFooter: React.FC = () => {
   return (
     <div>
       <h4>自定义页脚</h4>
-      <button  onClick={showModal}>
-        Open Modal with customized footer
-      </button>
+      <Button onClick={showModal}>Open Modal with customized footer</Button>
       <Modal
         open={open}
         title="Title"
@@ -37,15 +35,23 @@ const CustomFooter: React.FC = () => {
           <Button key="back" onClick={handleCancel}>
             Return
           </Button>,
-          <Button key="submit" onClick={handleOk}>
+          <Button
+            key="submit"
+            type="primary"
+            loading={loading}
+            onClick={handleOk}
+          >
             Submit
           </Button>,
           <Button
             key="link"
+            type="primary"
+            loading={loading}
             onClick={handleOk}
           >
             Search on Google
           </Button>,
+          ,
         ]}
       >
         <p>Some contents...</p>

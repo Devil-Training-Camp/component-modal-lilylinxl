@@ -1,6 +1,7 @@
-import React from "react";
-import { useState } from "react";
-import Modal from "../../components/Modal/index";
+import React from 'react';
+import { useState } from 'react';
+import Button from '../../components/Button/index';
+import Modal from '../../components/Modal/index';
 
 function Basic() {
   const [open, setOpen] = useState(false);
@@ -18,10 +19,10 @@ function Basic() {
   return (
     <div>
       <h4>基本</h4>
-      <button onClick={handleOpen}>Switch</button>
+      <Button onClick={handleOpen}>Open Modal</Button>
       <Modal
         open={open}
-        title={"提示信息"}
+        title={'提示信息'}
         onOk={handleOk}
         onCancel={handleCancel}
       >

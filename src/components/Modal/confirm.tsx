@@ -22,8 +22,7 @@ export type ModalStaticFunctions = Record<
 >;
 
 export default function confirm(config: ModalFuncProps) {
-  var container = document.createElement('div');
-  container.setAttribute('class', 'ant-modal-root');
+  const container = document.createElement('div');
 
   const close = (...args: any[]) => {
     currentConfig = {
@@ -53,22 +52,26 @@ export default function confirm(config: ModalFuncProps) {
         break;
       }
     }
-
-    reactUnmount(container);
+    const modalRoot = document.getElementsByClassName('modal-root');
+    if (modalRoot.length) {
+      reactUnmount((modalRoot[0] as any).parentNode);
+    }
   }
 
   function render({ okText, cancelText, ...props }: any) {
-    if (!document.getElementsByClassName('ant-modal-root').length) {
-      document.body.appendChild(container);
-    } else {
-      document.body.removeChild(container);
-    }
+    document.body.appendChild(container);
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
       reactRender(
         <ConfirmDialog {...props} okText={okText} cancelText={cancelText} />,
         container
       );
+      if (!props.open) {
+        const modalRoot = document.querySelector('.modal-root');
+        if (modalRoot) {
+          reactUnmount(modalRoot.parentNode);
+        }
+      }
     });
   }
 
