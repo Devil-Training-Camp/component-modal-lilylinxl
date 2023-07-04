@@ -22,7 +22,8 @@ export type ModalStaticFunctions = Record<
 >;
 
 export default function confirm(config: ModalFuncProps) {
-  const container = document.createElement('div');
+  // const container = document.createElement('div');
+  const container = document.createDocumentFragment();
 
   const close = (...args: any[]) => {
     currentConfig = {
@@ -59,7 +60,7 @@ export default function confirm(config: ModalFuncProps) {
   }
 
   function render({ okText, cancelText, ...props }: any) {
-    document.body.appendChild(container);
+    // document.body.appendChild(container);
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
       reactRender(
