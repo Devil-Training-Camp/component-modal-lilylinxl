@@ -1,7 +1,13 @@
 import * as React from 'react';
 import usePatchElement from '../../../util/hooks/usePatchElement';
 import type { ModalStaticFunctions } from '../interface';
-import { withConfirm, withError, withInfo, withSuccess, withWarn } from '../confirm';
+import {
+  withConfirm,
+  withError,
+  withInfo,
+  withSuccess,
+  withWarn,
+} from '../confirm';
 import destroyFns from '../destroyFns';
 import type { ModalFuncProps } from '../interface';
 import type { HookModalRef } from './HookModal';
@@ -21,15 +27,15 @@ const ElementsHolder = React.memo(
       () => ({
         patchElement,
       }),
-      [],
+      []
     );
     return <>{elements}</>;
-  }),
+  })
 );
 
 function useModal(): readonly [
   instance: Omit<ModalStaticFunctions, 'warn'>,
-  contextHolder: React.ReactElement,
+  contextHolder: React.ReactElement
 ] {
   const holderRef = React.useRef<ElementsHolderRef>(null);
 
@@ -97,7 +103,7 @@ function useModal(): readonly [
           },
         };
       },
-    [],
+    []
   );
 
   const fns = React.useMemo<Omit<ModalStaticFunctions, 'warn'>>(
@@ -108,7 +114,7 @@ function useModal(): readonly [
       warning: getConfirmFunc(withWarn),
       confirm: getConfirmFunc(withConfirm),
     }),
-    [],
+    []
   );
 
   return [fns, <ElementsHolder key="modal-holder" ref={holderRef} />] as const;

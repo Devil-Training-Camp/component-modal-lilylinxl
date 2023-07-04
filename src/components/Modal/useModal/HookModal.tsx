@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ConfirmDialog from '../ConfirmDialog';
 import type { ModalFuncProps } from '../interface';
-
+import { unmount as reactUnmount } from '../../../util/index';
 export interface HookModalProps {
   afterClose: () => void;
   config: ModalFuncProps;
@@ -22,6 +22,12 @@ const HookModal: React.ForwardRefRenderFunction<
   const afterClose = () => {
     hookAfterClose();
     innerConfig.afterClose?.();
+    if (!open) {
+      const modalRoot = document.querySelector('.modal-root');
+      if (modalRoot) {
+        reactUnmount(modalRoot.parentNode);
+      }
+    }
   };
 
   const close = (...args: any[]) => {
@@ -55,4 +61,4 @@ const HookModal: React.ForwardRefRenderFunction<
   );
 };
 
-export default React.forwardRef(HookModal);
+export default React.memo(React.forwardRef(HookModal));
