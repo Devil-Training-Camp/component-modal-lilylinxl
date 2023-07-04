@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, ReactElement } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { createPortal } from 'react-dom';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Icon from '../Icon/index';
@@ -54,7 +54,11 @@ const Modal: React.FC<ModalProps> = (props) => {
         init(container);
       } else {
         const needCreate = Array.from(existRoot).find((item) => {
+          const hasInner = item.getElementsByClassName('modal-wrap').length;
           const key = item?.dataset.key;
+          if (!hasInner) {
+            document.body.removeChild(item.parentNode);
+          }
           return key === currentKey;
         });
         needCreate || init(container);
@@ -148,4 +152,4 @@ const Modal: React.FC<ModalProps> = (props) => {
     : null;
 };
 
-export default Modal;
+export default memo(Modal);

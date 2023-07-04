@@ -9,9 +9,13 @@ const config = {
   title: 'Use Hook!',
   content: (
     <>
-      <ReachableContext.Consumer>{(name) => `Reachable: ${name}!`}</ReachableContext.Consumer>
+      <ReachableContext.Consumer>
+        {(name) => `Reachable: ${name}!`}
+      </ReachableContext.Consumer>
       <br />
-      <UnreachableContext.Consumer>{(name) => `Unreachable: ${name}!`}</UnreachableContext.Consumer>
+      <UnreachableContext.Consumer>
+        {(name) => `Unreachable: ${name}!`}
+      </UnreachableContext.Consumer>
     </>
   ),
 };
@@ -21,37 +25,35 @@ const ContextHolder: React.FC = () => {
 
   return (
     <ReachableContext.Provider value="Light">
-        <h4>
-        使用 hooks 获得上下文
-        </h4>
-        <Button
-          onClick={() => {
-            modal.confirm(config);
-          }}
-        >
-          Confirm
-        </Button>
-        <Button
-          onClick={() => {
-            modal.warning(config);
-          }}
-        >
-          Warning
-        </Button>
-        <Button
-          onClick={() => {
-            modal.info(config);
-          }}
-        >
-          Info
-        </Button>
-        <Button
-          onClick={() => {
-            modal.error(config);
-          }}
-        >
-          Error
-        </Button>
+      <h4>使用 hooks 获得上下文</h4>
+      <Button
+        onClick={() => {
+          modal.confirm(config);
+        }}
+      >
+        Confirm
+      </Button>
+      <Button
+        onClick={() => {
+          modal.warning(config);
+        }}
+      >
+        Warning
+      </Button>
+      <Button
+        onClick={() => {
+          modal.info(config);
+        }}
+      >
+        Info
+      </Button>
+      <Button
+        onClick={() => {
+          modal.error(config);
+        }}
+      >
+        Error
+      </Button>
       {/* `contextHolder` should always be placed under the context you want to access */}
       {contextHolder}
 

@@ -63,7 +63,7 @@ export function ConfirmContent(props: ConfirmDialogProps) {
     }
     close && close();
   };
-  const showFooter = type === 'confirm'; //这有啥用？
+  const showFooter = type === 'confirm';
   const cancelButton = showFooter && (
     <Button onClick={handleCancel} {...cancelButtonProps}>
       {cancelText || '取消'}
@@ -112,7 +112,7 @@ export function ConfirmContent(props: ConfirmDialogProps) {
   );
 }
 
-const ConfirmDialog: React.FC<ConfirmDialogProps> = (props) => {
+const ConfirmDialog: React.FC<ConfirmDialogProps> = React.memo((props) => {
   const {
     close,
     zIndex,
@@ -126,7 +126,6 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = (props) => {
     className,
     afterClose,
   } = props;
-
   const width = props.width || 416;
   const style = props.style || {};
   const mask = props.mask === undefined ? true : props.mask;
@@ -156,7 +155,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = (props) => {
       <ConfirmContent {...props} />
     </Dialog>
   );
-};
+});
 ConfirmDialog.displayName = 'ConfirmDialog';
 
 export default ConfirmDialog;

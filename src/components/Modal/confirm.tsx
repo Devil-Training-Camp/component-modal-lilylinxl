@@ -22,9 +22,7 @@ export type ModalStaticFunctions = Record<
 >;
 
 export default function confirm(config: ModalFuncProps) {
-  // const container = document.createElement('div');
   const container = document.createDocumentFragment();
-
   const close = (...args: any[]) => {
     currentConfig = {
       ...currentConfig,
