@@ -66,9 +66,8 @@ export default function confirm(config: ModalFuncProps) {
         container
       );
       if (!props.open) {
-        const modalRoot = document.querySelector('.modal-root');
-        if (modalRoot) {
-          reactUnmount(modalRoot.parentNode);
+        if (container) {
+          reactUnmount(container);
         }
       }
     });

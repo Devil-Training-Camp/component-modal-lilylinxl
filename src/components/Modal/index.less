@@ -1,4 +1,9 @@
-.modal-wrap {
+.modal-root{
+  --time: 0.3s;
+  --x: 0;
+  --y: 0;
+  .modal-wrap {
+
   position: fixed;
   top: 0;
   right: 0;
@@ -8,6 +13,7 @@
   outline: 0;
   z-index: 1000;
   inset: 0;
+  animation: show var(--time) forwards;
   .modal {
     width: 520px;
     transform-origin: 216px 327px;
@@ -137,4 +143,40 @@
       margin-left: 8px;
     }
   }
+}
+.modal-wrap-hide {
+  animation: hide var(--time) forwards;
+}
+.modal-no-animation {
+  animation: none !important;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes show {
+  0% {
+    transform: translate3d(var(--x), var(--y), 0) scale(0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes hide {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(var(--x), var(--y), 0) scale(0);
+    display: none;
+  }
+}
+
 }

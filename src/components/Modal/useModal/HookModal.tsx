@@ -22,12 +22,6 @@ const HookModal: React.ForwardRefRenderFunction<
   const afterClose = () => {
     hookAfterClose();
     innerConfig.afterClose?.();
-    if (!open) {
-      const modalRoot = document.querySelector('.modal-root');
-      if (modalRoot) {
-        reactUnmount(modalRoot.parentNode);
-      }
-    }
   };
 
   const close = (...args: any[]) => {
