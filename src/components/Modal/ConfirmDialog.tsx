@@ -2,12 +2,7 @@ import * as React from 'react';
 import Dialog from './Modal';
 import type { ModalFuncProps } from './interface';
 import Icon from '../Icon/index';
-import {
-  faTimesCircle,
-  faCheckCircle,
-  faInfoCircle,
-  faExclamationCircle,
-} from '../../../node_modules/@fortawesome/free-solid-svg-icons/index';
+import { faExclamationCircle } from '../../../node_modules/@fortawesome/free-solid-svg-icons/index';
 import Button from '../Button/index';
 
 interface ConfirmDialogProps extends ModalFuncProps {
@@ -33,24 +28,7 @@ export function ConfirmContent(props: ConfirmDialogProps) {
   const [isLoading, setIsLoading] = React.useState(false);
   // 支持传入{ icon: null }来隐藏`Modal.confirm`默认的Icon
   if (!icon && icon !== null) {
-    switch (type) {
-      case 'info':
-        mergedIcon = <Icon icon={faInfoCircle} color="#1677ff" size="lg" />;
-        break;
-
-      case 'success':
-        mergedIcon = <Icon icon={faCheckCircle} color="green" size="lg" />;
-        break;
-
-      case 'error':
-        mergedIcon = <Icon icon={faTimesCircle} color="red" size="lg" />;
-        break;
-
-      default:
-        mergedIcon = (
-          <Icon icon={faExclamationCircle} color="#faad14" size="lg" />
-        );
-    }
+    mergedIcon = <Icon icon={faExclamationCircle} color="#faad14" size="lg" />;
   }
 
   const okType = props.okType || 'primary';

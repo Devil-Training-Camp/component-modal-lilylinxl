@@ -1,11 +1,14 @@
-import {
-  render as reactRender,
-  unmount as reactUnmount,
-} from '../../util/index';
 import * as React from 'react';
 import ConfirmDialog from './ConfirmDialog';
 import destroyFns from './destroyFns';
 import type { ModalFuncProps } from './interface';
+import { createRoot } from 'react-dom/client';
+import {
+  faCheckCircle,
+  faInfoCircle,
+  faTimesCircle,
+} from '../../../node_modules/@fortawesome/free-solid-svg-icons/index';
+import Icon from '../Icon/index';
 
 type ConfigUpdate =
   | ModalFuncProps
@@ -22,8 +25,8 @@ export type ModalStaticFunctions = Record<
 >;
 
 export default function confirm(config: ModalFuncProps) {
-  const container = document.createDocumentFragment();
-  const close = (...args: any[]) => {
+  const root = createRoot(document.createDocumentFragment());
+  const close = () => {
     currentConfig = {
       ...currentConfig,
       open: false,
@@ -31,47 +34,23 @@ export default function confirm(config: ModalFuncProps) {
         if (typeof config.afterClose === 'function') {
           config.afterClose();
         }
-        destroy.apply(this, args);
+        destroy();
+      },
+      onCancel() {
+        config.onCancel?.();
+        close();
       },
     };
     render(currentConfig);
   };
   let currentConfig = { ...config, close, open: true } as any;
-  let timeoutId: NodeJS.Timeout;
 
-  function destroy(...args: any[]) {
-    const triggerCancel = args.some((param) => param && param.triggerCancel);
-    if (config.onCancel && triggerCancel) {
-      config.onCancel(() => {}, ...args.slice(1));
-    }
-    for (let i = 0; i < destroyFns.length; i++) {
-      const fn = destroyFns[i];
-      if (fn === close) {
-        destroyFns.splice(i, 1);
-        break;
-      }
-    }
-    const modalRoot = document.getElementsByClassName('modal-root');
-    if (modalRoot.length) {
-      reactUnmount((modalRoot[0] as any).parentNode);
-    }
+  function destroy() {
+    root.unmount();
   }
 
   function render({ okText, cancelText, ...props }: any) {
-    // document.body.appendChild(container);
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      reactRender(
-        <ConfirmDialog {...props} okText={okText} cancelText={cancelText} />,
-        container
-      );
-      if (!props.open) {
-        const modalRoot = document.querySelector('.modal-root');
-        if (modalRoot) {
-          reactUnmount(modalRoot.parentNode);
-        }
-      }
-    });
+    root.render(<ConfirmDialog {...props} afterClose={destroy} />);
   }
 
   function update(configUpdate: ConfigUpdate) {
@@ -107,6 +86,7 @@ export function withInfo(props: ModalFuncProps): ModalFuncProps {
   return {
     ...props,
     type: 'info',
+    icon: <Icon icon={faInfoCircle} color="#1677ff" size="lg" />,
   };
 }
 
@@ -114,6 +94,7 @@ export function withSuccess(props: ModalFuncProps): ModalFuncProps {
   return {
     ...props,
     type: 'success',
+    icon: <Icon icon={faCheckCircle} color="green" size="lg" />,
   };
 }
 
@@ -121,6 +102,7 @@ export function withError(props: ModalFuncProps): ModalFuncProps {
   return {
     ...props,
     type: 'error',
+    icon: <Icon icon={faTimesCircle} color="red" size="lg" />,
   };
 }
 

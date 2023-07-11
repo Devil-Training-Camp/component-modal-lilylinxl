@@ -1,0 +1,386 @@
+@font-size-base: 12px;
+@font-size-sm: 12px;
+@font-size-lg: @font-size-base + 2px;
+@text-color: rgba(0, 0, 0, 0.65);
+@text-color-secondary: fade(#000, 45%);
+@black: #000;
+@outline-fade: 20%;
+
+@primary-color: #00b96b;
+@primary-1: tint(@primary-color, 90%);
+@primary-2: tint(@primary-color, 80%);
+@primary-3: tint(@primary-color, 60%);
+@primary-4: tint(@primary-color, 40%);
+@primary-5: tint(@primary-color, 20%);
+@primary-6: @primary-color;
+@primary-7: shade(@primary-color, 20%);
+@primary-8: shade(@primary-color, 40%);
+@primary-9: shade(@primary-color, 60%);
+@primary-10: shade(@primary-color, 80%);
+
+@btn-height-base: 28px;
+@btn-height-lg: 32px;
+@btn-height-sm: 24px;
+
+@line-height-base: 1.5715;
+@border-radius-base: 2px;
+
+@padding-lg: 24px; // containers
+@padding-md: 16px; // small containers and buttons
+@padding-sm: 12px; // Form controls and items
+@padding-xs: 8px; // small items
+@padding-xss: 4px; // more small
+
+@component-background: #fff;
+
+@border-color-base: hsv(0, 0, 85%); // base border outline a component
+@border-color-split: hsv(0, 0, 94%); // split border inside a component
+@border-width-base: 1px; // width of the border for a component
+@border-style-base: solid; // style of a components border
+
+@item-hover-bg: #f5f5f5;
+@item-active-bg: @primary-1;
+
+@box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+  0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+@icon-color-hover: fade(@black, 75%);
+
+// Buttons
+@btn-font-weight: 400;
+@btn-border-radius-base: @lxl-border-radius-base;
+@btn-border-radius-sm: @lxl-border-radius-base;
+@btn-border-width: @border-width-base;
+@btn-border-style: @border-style-base;
+@btn-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+@btn-primary-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+
+@btn-primary-color: #fff;
+
+@btn-default-color: @lxl-text-color;
+@btn-default-bg: @component-background;
+@btn-default-border: @lxl-border-color-base;
+
+@btn-danger-color: #fff;
+@btn-danger-bg: @lxl-error-color;
+@btn-danger-border: @lxl-error-color;
+
+@btn-disable-color: @lxl-disabled-color;
+@btn-disable-bg: @lxl-disabled-bg;
+@btn-disable-border: @lxl-border-color-base;
+
+@btn-font-size-lg: @lxl-font-size-lg;
+@btn-font-size-sm: @lxl-font-size-sm;
+@btn-padding-horizontal-base: @padding-md - 1px;
+@btn-padding-horizontal-lg: @btn-padding-horizontal-base;
+@btn-padding-horizontal-sm: @padding-xs - 1px;
+
+@black-1: tint(@black, 90%);
+
+@red-base: #f5222d;
+@red-5: mix(@red-base, @component-background, 65%);
+@error-color: @red-5;
+@error-color-hover: tint(@red-5, 20%);
+@error-color-active: shade(@red-5, 20%);
+@error-color-outline: fade(@red-5, @outline-fade);
+@error-1: tint(@error-color, 90%);
+@error-2: tint(@error-color, 80%);
+@error-3: tint(@error-color, 70%);
+
+@info-color: @primary-color;
+@info-1: tint(@info-color, 90%);
+@info-2: tint(@info-color, 80%);
+@info-3: tint(@info-color, 70%);
+@info-4: tint(@info-color, 60%);
+@info-5: tint(@info-color, 20%);
+@info-6: @info-color;
+@info-7: shade(@info-color, 5%);
+
+@success-color: #52c41a;
+@success-1: tint(@success-color, 90%);
+@success-2: tint(@success-color, 80%);
+@success-3: tint(@success-color, 70%);
+@success-4: tint(@success-color, 60%);
+@success-5: tint(@success-color, 20%);
+@success-6: @success-color;
+@success-7: shade(@success-color, 5%);
+
+@warning-color: #faad14;
+@warning-1: tint(@warning-color, 90%);
+@warning-2: tint(@warning-color, 80%);
+@warning-3: tint(@warning-color, 70%);
+@warning-4: tint(@warning-color, 60%);
+@warning-5: tint(@warning-color, 20%);
+@warning-6: @warning-color;
+@warning-7: shade(@warning-color, 5%);
+
+@disabled-color: fade(#000, 25%);
+
+@background-color-base: hsv(0, 0, 96%); // Default grey background color
+@background-color-light: hsv(
+  0,
+  0,
+  98%
+); // background of header and selected item
+@disabled-bg: @background-color-base;
+
+@zIndex-modal: 1000;
+
+@heading-color: fade(@black, 85%);
+@modal-header-padding-vertical: @padding-sm;
+@modal-header-padding-horizontal: @padding-lg;
+@modal-body-padding: @padding-lg;
+@modal-header-bg: @component-background;
+@modal-header-padding: @modal-header-padding-vertical
+  @modal-header-padding-horizontal;
+@modal-header-border-width: @border-width-base;
+@modal-header-border-style: @border-style-base;
+@modal-header-title-line-height: 22px;
+@modal-header-title-font-size: @lxl-font-size-lg;
+@modal-header-border-color-split: @border-color-split;
+@modal-header-close-size: @modal-header-title-line-height +
+  @modal-header-padding-vertical * 2;
+@modal-content-bg: @component-background;
+@modal-heading-color: @lxl-heading-color;
+@modal-close-color: @lxl-text-color-secondary;
+@modal-footer-bg: transparent;
+@modal-footer-border-color-split: @border-color-split;
+@modal-footer-border-style: @border-style-base;
+@modal-footer-padding-vertical: 10px;
+@modal-footer-padding-horizontal: 16px;
+@modal-footer-border-width: @border-width-base;
+@modal-mask-bg: fade(@black, 45%);
+@modal-confirm-body-padding: 32px 32px 24px;
+
+@spin-dot-size-sm: 14px;
+@spin-dot-size: 20px;
+@spin-dot-size-lg: 32px;
+
+@lxl-text-color: var(--lxl-text-color, @text-color);
+@lxl-text-color-secondary: var(
+  --lxl-text-color-secondary,
+  @text-color-secondary
+);
+@lxl-heading-color: var(--lxl-heading-color, @heading-color);
+@lxl-font-size-base: var(--lxl-font-size-base, @font-size-base);
+@lxl-font-size-sm: var(--lxl-font-size-sm, @font-size-sm);
+@lxl-font-size-lg: var(--lxl-font-size-lg, @font-size-lg);
+@lxl-line-height-base: var(--lxl-line-height-base, @line-height-base);
+
+@lxl-padding-lg: var(--lxl-padding-lg, @padding-lg);
+@lxl-padding-md: var(--lxl-padding-md, @padding-md);
+@lxl-padding-sm: var(--lxl-padding-sm, @padding-sm);
+@lxl-padding-xs: var(--lxl-padding-xs, @padding-xs);
+@lxl-padding-xss: var(--lxl-padding-xss, @padding-xss);
+
+@lxl-component-background: var(
+  --lxl-component-background,
+  @component-background
+);
+
+@lxl-border-width-base: var(--lxl-border-width-base, @border-width-base);
+@lxl-border-style-base: var(--lxl-border-style-base, @border-style-base);
+@lxl-border-color-base: var(--lxl-border-color-base, @border-color-base);
+@lxl-border-color-split: var(--lxl-border-color-split, @border-color-split);
+@lxl-box-shadow-base: var(--lxl-box-shadow-base, @box-shadow-base);
+
+@lxl-border-radius-base: var(--lxl-border-radius-base, @border-radius-base);
+@lxl-item-hover-bg: var(--lxl-item-hover-bg, @item-hover-bg);
+@lxl-item-active-bg: var(--lxl-item-active-bg, @item-active-bg);
+
+@lxl-primary-color: var(--lxl-primary-color, @primary-color);
+@lxl-primary-1: var(--lxl-primary-1, @primary-1);
+@lxl-primary-2: var(--lxl-primary-2, @primary-2);
+@lxl-primary-3: var(--lxl-primary-3, @primary-3);
+@lxl-primary-4: var(--lxl-primary-4, @primary-4);
+@lxl-primary-5: var(--lxl-primary-5, @primary-5);
+@lxl-primary-6: var(--lxl-primary-6, @primary-6);
+@lxl-primary-7: var(--lxl-primary-7, @primary-7);
+@lxl-primary-8: var(--lxl-primary-8, @primary-8);
+@lxl-primary-9: var(--lxl-primary-9, @primary-9);
+@lxl-primary-10: var(--lxl-primary-10, @primary-10);
+@lxl-primary-color-hover: var(--lxl-primary-color-hover, @lxl-primary-5);
+@lxl-primary-color-active: var(--lxl-primary-color-active, @lxl-primary-7);
+@lxl-primary-color-outline: var(
+  --lxl-primary-color-outline,
+  fade(@primary-color, @outline-fade)
+);
+
+@lxl-primary-fade-1: var(--lxl-primary-fade-1, fade(@primary-color, 10%));
+@lxl-primary-fade-2: var(--lxl-primary-fade-2, fade(@primary-color, 20%));
+@lxl-primary-fade-3: var(--lxl-primary-fade-3, fade(@primary-color, 30%));
+@lxl-primary-fade-4: var(--lxl-primary-fade-4, fade(@primary-color, 40%));
+@lxl-primary-fade-5: var(--lxl-primary-fade-5, fade(@primary-color, 50%));
+@lxl-primary-fade-6: var(--lxl-primary-fade-6, fade(@primary-color, 60%));
+@lxl-primary-fade-7: var(--lxl-primary-fade-7, fade(@primary-color, 70%));
+@lxl-primary-fade-8: var(--lxl-primary-fade-8, fade(@primary-color, 80%));
+@lxl-primary-fade-9: var(--lxl-primary-fade-9, fade(@primary-color, 90%));
+
+@lxl-icon-color-hover: var(--lxl-icon-color-hover, @icon-color-hover);
+@lxl-error-color: var(--lxl-error-color, @error-color);
+@lxl-error-color-hover: var(--lxl-error-color-hover, @error-color-hover);
+@lxl-error-color-active: var(--lxl-error-color-active, @error-color-active);
+@lxl-error-color-outline: var(--lxl-error-color-outline, @error-color-outline);
+@lxl-error-1: var(--lxl-error-1, @error-1);
+@lxl-error-2: var(--lxl-error-2, @error-2);
+@lxl-error-3: var(--lxl-error-3, @error-3);
+
+@lxl-info-color: var(--lxl-info-color, @info-color);
+@lxl-info-color-hover: var(--lxl-info-color-hover, @info-5);
+@lxl-info-color-active: var(--lxl-info-color-active, @info-7);
+@lxl-info-color-outline: var(
+  --lxl-info-color-outline,
+  fade(@info-color, @outline-fade)
+);
+@lxl-info-1: var(--lxl-info-1, @info-1);
+@lxl-info-2: var(--lxl-info-2, @info-2);
+@lxl-info-3: var(--lxl-info-3, @info-3);
+
+@lxl-success-color: var(--lxl-success-color, @success-color);
+@lxl-success-color-hover: var(--lxl-success-color-hover, @success-5);
+@lxl-success-color-active: var(--lxl-success-color-active, @success-7);
+@lxl-success-color-outline: var(
+  --lxl-success-color-outline,
+  fade(@success-color, @outline-fade)
+);
+@lxl-success-1: var(--lxl-success-1, @success-1);
+@lxl-success-2: var(--lxl-success-2, @success-2);
+@lxl-success-3: var(--lxl-success-3, @success-3);
+
+@lxl-warning-color: var(--lxl-warning-color, @warning-color);
+@lxl-warning-color-hover: var(--lxl-warning-color-hover, @warning-5);
+@lxl-warning-color-active: var(--lxl-warning-color-active, @warning-7);
+@lxl-warning-color-outline: var(
+  --lxl-warning-color-outline,
+  fade(@warning-color, @outline-fade)
+);
+@lxl-warning-1: var(--lxl-warning-1, @warning-1);
+@lxl-warning-2: var(--lxl-warning-2, @warning-2);
+@lxl-warning-3: var(--lxl-warning-3, @warning-3);
+
+@lxl-disabled-color: var(--lxl-disabled-color, @disabled-color);
+@lxl-background-color-base: var(
+  --lxl-background-color-base,
+  @background-color-base
+);
+@lxl-background-color-light: var(
+  --lxl-background-color-light,
+  @background-color-light
+);
+@lxl-disabled-bg: var(--lxl-disabled-bg, @disabled-bg);
+
+// Button
+@lxl-btn-font-weight: var(--lxl-btn-font-weight, @btn-font-weight);
+@lxl-btn-border-radius-base: var(
+  --lxl-btn-border-radius-base,
+  @btn-border-radius-base
+);
+@lxl-btn-border-radius-sm: var(
+  --lxl-btn-border-radius-sm,
+  @btn-border-radius-sm
+);
+@lxl-btn-border-width: var(--lxl-btn-border-width, @btn-border-width);
+@lxl-btn-border-style: var(--lxl-btn-border-style, @btn-border-style);
+@lxl-btn-shadow: var(--lxl-btn-shadow, @btn-shadow);
+@lxl-btn-primary-shadow: var(--lxl-btn-primary-shadow, @btn-primary-shadow);
+
+@lxl-btn-primary-color: var(--lxl-btn-primary-color, @btn-primary-color);
+
+@lxl-btn-default-color: var(--lxl-btn-default-color, @btn-default-color);
+@lxl-btn-default-bg: var(--lxl-btn-default-bg, @btn-default-bg);
+@lxl-btn-default-border: var(--lxl-btn-default-border, @btn-default-border);
+
+@lxl-btn-danger-color: var(--lxl-btn-danger-color, @btn-danger-color);
+@lxl-btn-danger-bg: var(--lxl-btn-danger-bg, @btn-danger-bg);
+@lxl-btn-danger-border: var(--lxl-btn-danger-border, @btn-danger-border);
+
+@lxl-btn-disable-color: var(--lxl-btn-disable-color, @btn-disable-color);
+@lxl-btn-disable-bg: var(--lxl-btn-disable-bg, @btn-disable-bg);
+@lxl-btn-disable-border: var(--lxl-btn-disable-border, @btn-disable-border);
+
+@lxl-btn-font-size-lg: var(--lxl-btn-font-size-lg, @btn-font-size-lg);
+@lxl-btn-font-size-sm: var(--lxl-btn-font-size-sm, @btn-font-size-sm);
+@lxl-btn-padding-horizontal-base: var(
+  --lxl-btn-padding-horizontal-base,
+  @btn-padding-horizontal-base
+);
+@lxl-btn-padding-horizontal-lg: var(
+  --lxl-btn-padding-horizontal-lg,
+  @btn-padding-horizontal-lg
+);
+@lxl-btn-padding-horizontal-sm: var(
+  --lxl-btn-padding-horizontal-sm,
+  @btn-padding-horizontal-sm
+);
+
+@lxl-btn-size-base: var(--lxl-btn-height-base, @btn-height-base);
+@lxl-btn-size-lg: var(--ux-btn-height-lg, @btn-height-lg);
+@lxl-btn-size-sm: var(--ux-btn-height-sm, @btn-height-sm);
+
+@lxl-animation-base: var(--ux-animation-base, cubic-bezier(0.25, 0.8, 0.25, 1));
+
+// Modal
+@lxl-modal-index: var(--ux-modal-index, @zIndex-modal);
+@lxl-modal-body-padding: var(--ux-modal-body-padding, @modal-body-padding);
+@lxl-modal-header-bg: var(--ux-modal-header-bg, @modal-header-bg);
+@lxl-modal-header-padding: var(
+  --ux-modal-header-padding,
+  @modal-header-padding
+);
+@lxl-modal-header-border-width: var(
+  --ux-modal-header-border-width,
+  @modal-header-border-width
+);
+@lxl-modal-header-border-style: var(
+  --ux-modal-header-border-style,
+  @modal-header-border-style
+);
+@lxl-modal-header-title-line-height: var(
+  --ux-modal-header-title-line-height,
+  @modal-header-title-line-height
+);
+@lxl-modal-header-title-font-size: var(
+  --ux-modal-header-title-font-size,
+  @modal-header-title-font-size
+);
+@lxl-modal-header-border-color-split: var(
+  --ux-modal-header-border-color-split,
+  @modal-header-border-color-split
+);
+@lxl-modal-close-size: var(--ux-modal-close-size, @modal-header-close-size);
+@lxl-modal-content-bg: var(--ux-modal-content-bg, @modal-content-bg);
+@lxl-modal-heading-color: var(--ux-modal-heading-color, @modal-heading-color);
+@lxl-modal-close-color: var(--ux-modal-close-color, @modal-close-color);
+@lxl-modal-footer-bg: var(--ux-modal-footer-bg, @modal-footer-bg);
+@lxl-modal-footer-border-color-split: var(
+  --ux-modal-footer-border-color-split,
+  @modal-footer-border-color-split
+);
+@lxl-modal-footer-border-style: var(
+  --ux-modal-footer-border-style,
+  @modal-footer-border-style
+);
+@lxl-modal-footer-padding-vertical: var(
+  --ux-modal-footer-padding-vertical,
+  @modal-footer-padding-vertical
+);
+@lxl-modal-footer-padding-horizontal: var(
+  --ux-modal-footer-padding-horizontal,
+  @modal-footer-padding-horizontal
+);
+@lxl-modal-footer-border-width: var(
+  --ux-modal-footer-border-width,
+  @modal-footer-border-width
+);
+@lxl-modal-mask-bg: var(--ux-modal-mask-bg, @modal-mask-bg);
+@lxl-modal-confirm-body-padding: var(
+  --ux-modal-confirm-body-padding,
+  @modal-confirm-body-padding
+);
+
+// Spin
+@lxl-spin-dot-size-sm: var(--ux-spin-dot-size-sm, @spin-dot-size-sm);
+@lxl-spin-dot-size: var(--ux-spin-dot-size, @spin-dot-size);
+@lxl-spin-dot-size-lg: var(--ux-spin-dot-size-lg, @spin-dot-size-lg);
+@lxl-spin-mask-bg: var(--ux-spin-mask-bg, rgb(255 255 255 / 50%));
+@lxl-spin-index: var(--ux-spin-index, 4);

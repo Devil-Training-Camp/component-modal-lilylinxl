@@ -28,13 +28,32 @@ export interface ModalProps {
   maskStyle?: CSSProperties;
   bodyStyle?: CSSProperties;
   zIndex?: number;
-  afterClose?: Function;
   keyboard?: boolean;
   getContainer?: any;
   closable?: boolean;
   closeIcon?: ReactNode;
   modalRender?: Function;
   focusTriggerAfterClose?: boolean;
+  /**
+   * Modal 完全打开后的回调
+   */
+  afterOpen?: () => void;
+  /**
+   * Modal 完全关闭后的回调
+   */
+  afterClose?: () => void;
+  /**
+   * 关闭时销毁 Modal 里的子元素
+   * @defaultValue true
+   */
+  destroyOnClose?: boolean;
+  /**
+   * 动画名称
+   */
+  animation?: {
+    in?: string;
+    out?: string;
+  };
 }
 
 export interface ModalFuncProps {
